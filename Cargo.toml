@@ -15,7 +15,7 @@ puffin = ["dep:puffin"]
 
 [dependencies]
 log = "0.4"
-egui = "0.33"
+egui = { version = "0.33", default-features = false }
 regex = "1.12"
 puffin = { version = "0.19",  optional = true }
 
