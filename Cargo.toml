@@ -1,6 +1,6 @@
 [package]
 name = "egui_logger"
-version = "0.9.3"
+version = "0.10.0"
 edition = "2024"
 authors = ["Jacob <RegenJacob@gmx.de>"]
 license = "MIT"
@@ -17,7 +17,7 @@ puffin = ["dep:puffin"]
 log = "0.4"
 egui = "0.34"
 regex = "1.12"
-puffin = { version = "0.19",  optional = true }
+puffin = { version = "0.20",  optional = true }
 
 [dev-dependencies]
 eframe = "0.34"
