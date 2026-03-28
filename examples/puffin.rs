@@ -24,10 +24,10 @@ fn main() {
 struct MyApp;
 
 impl eframe::App for MyApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         puffin::GlobalProfiler::lock().new_frame();
-        puffin_egui::profiler_window(ctx);
-        egui::CentralPanel::default().show(ctx, |ui| {
+        puffin_egui::profiler_window(ui.ctx());
+        egui::CentralPanel::default().show_inside(ui, |ui| {
             #[cfg(feature = "puffin")]
             puffin::profile_scope!("Render UI");
             if ui.button("This produces Debug Info").clicked() {
@@ -51,7 +51,7 @@ impl eframe::App for MyApp {
                 log::warn!("Warn about something")
             }
         });
-        egui::Window::new("Log").show(ctx, |ui| {
+        egui::Window::new("Log").show(ui, |ui| {
             // draws the actual logger ui
             egui_logger::LoggerUi::default()
                 .enable_regex(true) // enables regex, default is true

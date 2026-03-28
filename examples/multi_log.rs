@@ -22,8 +22,8 @@ fn main() {
 struct MultiLogApp;
 
 impl eframe::App for MultiLogApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        egui::CentralPanel::default().show_inside(ui, |ui| {
             if ui.button("This produces Debug Info").clicked() {
                 log::debug!("Very verbose Debug Info")
             }
@@ -37,7 +37,7 @@ impl eframe::App for MultiLogApp {
                 log::warn!("Warn about something")
             }
         });
-        egui::Window::new("Log").show(ctx, |ui| {
+        egui::Window::new("Log").show(ui, |ui| {
             egui_logger::logger_ui()
                 .enable_regex(true)
                 .show_target(false) // multi_log won't show the target

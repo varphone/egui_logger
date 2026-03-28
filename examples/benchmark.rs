@@ -40,8 +40,8 @@ impl Default for BenchmarkApp {
 }
 
 impl eframe::App for BenchmarkApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        egui::CentralPanel::default().show_inside(ui, |ui| {
             ui.heading("egui_logger Benchmark");
             ui.label("1000 logs generated (250 each: error, warn, info, debug)");
             ui.separator();
@@ -71,7 +71,7 @@ impl eframe::App for BenchmarkApp {
             }
         });
 
-        egui::Window::new("Log").show(ctx, |ui| {
+        egui::Window::new("Log").show(ui, |ui| {
             let start = Instant::now();
             egui_logger::logger_ui()
                 .enable_cache_layouts(true)

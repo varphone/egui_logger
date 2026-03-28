@@ -21,8 +21,8 @@ fn main() {
 struct MyApp;
 
 impl eframe::App for MyApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        egui::CentralPanel::default().show_inside(ui, |ui| {
             if ui.button("This produces Debug Info").clicked() {
                 log::debug!("Very verbose Debug Info")
             }
@@ -36,7 +36,7 @@ impl eframe::App for MyApp {
                 log::warn!("Warn about something")
             }
         });
-        egui::Window::new("Log").show(ctx, |ui| {
+        egui::Window::new("Log").show(ui, |ui| {
             // draws the actual logger ui
             egui_logger::LoggerUi::default()
                 .enable_regex(true) // enables regex, default is true
